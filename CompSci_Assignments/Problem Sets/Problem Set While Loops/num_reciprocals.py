@@ -3,10 +3,10 @@
 
 def num_reciprocals(goal):
     count = 0
-    sum = 0
-    while goal > sum:
+    total = 0
+    while goal > total:
         count += 1
-        sum += (1 / count)
+        total += (1 / count)
 
     return count
 
