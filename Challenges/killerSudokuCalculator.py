@@ -10,5 +10,4 @@ def KillerSudokuCalc(total: int, number_of_nums: int, Not=None):
     return FinalLst
 
 
-print(KillerSudokuCalc(10, 3, [4, 6, 9]))
-print(KillerSudokuCalc(16, 3, [4, 2, 6, 9]))
+print(KillerSudokuCalc(10, 3, []))
