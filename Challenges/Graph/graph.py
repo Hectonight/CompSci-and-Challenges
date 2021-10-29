@@ -1,41 +1,11 @@
 import turtle
-import math
-import sympy
+from math import *
 
 
 def createEQ():
     print("Enter own function")
     userEQ = input()
-    replace = {
-        "^": "**",
-        "sin": "math.sin",
-        "cos": "math.cos",
-        "tan": "math.tan",
-        "csc": "math.csc",
-        "sec": "math.sec",
-        "cot": "math.cot",
-        "pi": "math.pi",
-        "ceil": "math.ceil",
-        "floor": "math.floor",
-        "amath.": "math.a",
-        "sqrt": "math.sqrt",
-        "comb": "math.comb",
-        "copysign": "math.copysign",
-        "factorial": "math.factorial",
-        "gcd": "math.gcd",
-        "lcm": "math.lcm",
-        "exp": "math.exp",
-        "log": "math.log",
-        "tau": "math.tau",
-        "e": "math.e",
-        "smath.": "s",
-        "cmath.": "c",
-        "math.math.": "math."
-    }
-
-    for word in replace:
-        userEQ = userEQ.replace(word, replace[word])
-
+    userEQ = userEQ.replace("^", "**")
     return userEQ
 
 
@@ -44,32 +14,20 @@ def TurtleSetUp():
     global line
     line = turtle.Turtle()
     line.speed(0)
-    pos = [-350, 350, 0, 0, 0]
+    pos = [-350, 350, 0, 0]
     for num in range(len(pos)):
         line.goto(pos[num], pos[-num - 1])
-
-
+        line.goto(0, 0)
 
 
 # noinspection PyUnusedLocal
 def custom(x, eq):
     try:
         float(eval(eq))
-        if x != -350:
-            line.pendown()
-        return float((eval(eq)))
-    except ZeroDivisionError:
         line.pendown()
-        return float(eval(ZeroDivision(eq)))
-    except TypeError:
+        return float((eval(eq)))
+    except:
         return None
-
-
-
-def ZeroDivision(eq):
-    equation = eq.replace("round(x)", "round(x) + 0.00000000000001")
-    equation = equation.replace("x", "(x+0.00000000000001)")
-    return equation
 
 
 def makeGraph(func, color):
@@ -89,7 +47,7 @@ def makeGraph(func, color):
         try:
             line.goto(x / points, func(x / points, eq))
         except TypeError:
-            pass
+            line.pendown()
 
 
 makeGraph(custom, "red")
