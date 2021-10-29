@@ -8,6 +8,3 @@ def KillerSudokuCalc(total: int, number_of_nums: int, Not=None):
     FinalLst = list(combinations(FinalRange, number_of_nums))
     FinalLst = [combination for combination in FinalLst if sum(combination) == total]
     return FinalLst
-
-
-print(KillerSudokuCalc(10, 3, []))
