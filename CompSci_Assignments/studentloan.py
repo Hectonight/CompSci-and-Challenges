@@ -16,5 +16,5 @@ while balance > 0:
 paid += balance
 
 print("Total paid = $" + str(round(paid, 2)))
-print("Total number of months =", 65)
+print("Total number of months =",  months)
 
