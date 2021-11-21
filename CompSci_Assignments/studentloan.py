@@ -8,8 +8,8 @@ paid = 0
 months = 0
 
 while balance > 0:
-    balance -= 300
-    paid += 300
+    balance -= payment
+    paid += payment
     balance *= (1 + intrest)
     months += 1
 
