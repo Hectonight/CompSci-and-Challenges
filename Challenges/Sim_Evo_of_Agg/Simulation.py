@@ -90,9 +90,9 @@ for cycle in range(num_cycles):
                                         index=[new_index])
             organisms = organisms.append(organismsAdd)
 
-    #print()
-    #print(organisms)
-    #print()
+    # print()
+    # print(organisms)
+    # print()
 
     for organism in organ:
         if not organisms.loc[organism, "Survives"]:
