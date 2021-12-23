@@ -17,7 +17,7 @@ def derivative(eq):
     Final = eqO[-1].join(eqF)
     Final = Final.replace("x^1+", "x+")
     Final = Final.replace("x^1-", "x-")
-    Final = Final.replace("x^1-", "x-")
+    Final = Final.replace("x^0", "")
     return Final
 
 
