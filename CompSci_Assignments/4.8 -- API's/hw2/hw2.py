@@ -15,7 +15,6 @@ while True:
     except:
         print("Uh oh! Something went wrong. Please Try Again")
 
-print(d)
 
 f = open(path + "search-output.json", "w")
 f.write(json.dumps(d))
