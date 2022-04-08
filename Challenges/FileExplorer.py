@@ -1,4 +1,5 @@
 import os
+from sys import platform
 from tkinter import *
 
 window = Tk()
@@ -16,7 +17,7 @@ def go():
         os.chdir(file)
         setpath()
     except NotADirectoryError:
-        os.system("open" if sys.platform != "win32" else "" + f'"{file}"')
+        os.system("open" if platform != "win32" else "" + f'"{file}"')
 
 
 path = StringVar()
