@@ -9,7 +9,6 @@ def setpath():
     path.set("Path: " + os.getcwd())
     files.set(os.listdir())
 
-
 def go():
     index = fileBox.curselection()[0]
     file = files.get()[index]
@@ -17,7 +16,7 @@ def go():
         os.chdir(file)
         setpath()
     except NotADirectoryError:
-        os.system(f'open "{file}"')
+        os.system("open" if sys.platform != "win32" else "" + f'"{file}"')
 
 
 path = StringVar()
