@@ -17,7 +17,7 @@ def go():
         os.chdir(file)
         setpath()
     except NotADirectoryError:
-        os.system("open" if platform != "win32" else "" + f'"{file}"')
+        os.system("open " + f'"{file}"' if platform != "win32" else "" + f'"{file}"')
 
 
 path = StringVar()
