@@ -10,6 +10,7 @@ def setpath():
     path.set("Path: " + os.getcwd())
     files.set(os.listdir())
 
+
 def go():
     index = fileBox.curselection()[0]
     file = files.get()[index]
