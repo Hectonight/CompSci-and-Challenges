@@ -14,7 +14,7 @@ import time
 board = pyfirmata.Arduino(port)
 
 while True:
-    board.digital[13].write(1)
-    time.sleep(1.0)                   # Time that the light is on. You can change this number.
-    board.digital[13].write(0)
-    time.sleep(1.0)                   # Try changing this number too. You can get the blinks to change.
+	board.digital[13].write(1)
+	time.sleep(1.0)  # Time that the light is on. You can change this number.
+	board.digital[13].write(0)
+	time.sleep(1.0)  # Try changing this number too. You can get the blinks to change.
