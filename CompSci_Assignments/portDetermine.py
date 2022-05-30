@@ -1,3 +1,5 @@
+# A file to determine the port for whether I am using my school laptop or PC
+
 from sys import platform
 
 winPort = "COM3"
