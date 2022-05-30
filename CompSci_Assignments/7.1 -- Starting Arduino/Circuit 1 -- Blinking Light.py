@@ -1,14 +1,17 @@
+from CompSci_Assignments.portDetermine import port
 import pyfirmata
 import time
 
 # The right string input here might be different on your computer.
 # Once the Arduino is plugged into your computer, go to
 # the Arduino IDE, then do:
-# Tools > Port and find the port that is similar to the one
+# Tools > Port and find the Port that is similar to the one
 # below (NOT Bluetooth). The numbers on the end might be different.
 # Change the input below so that it matches whatever you see
 # in the Arduino IDE.
-board = pyfirmata.Arduino("/dev/cu.usbmodem14201")
+
+
+board = pyfirmata.Arduino(port)
 
 while True:
     board.digital[13].write(1)

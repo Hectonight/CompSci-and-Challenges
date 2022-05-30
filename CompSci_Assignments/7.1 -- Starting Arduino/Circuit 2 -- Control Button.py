@@ -1,9 +1,11 @@
+from CompSci_Assignments.portDetermine import port
 import pyfirmata
 import time
 
+
 # Again, you might need to change the input here.
 # Should be the same as whatever worked in Demo 1.
-board = pyfirmata.Arduino("/dev/cu.usbmodem14201")
+board = pyfirmata.Arduino(port)
 
 # An iterator is a loop that runs "in parallel" with your
 # main code. This loop checks the input from the button.
