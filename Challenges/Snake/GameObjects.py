@@ -13,14 +13,14 @@ DOWN = 3
 
 class SnakeHead(Sprite):
 
-    def __init__(self, window, SpriteSpeed, *groups):
-        self.windowSize = window.get_size()[0]
-        self.size = self.windowSize / 16
-        self.speed = SpriteSpeed
+    def __init__(self, window, sprite_speed, *groups):
+        self.window_size = window.get_size()[0]
+        self.size = self.window_size / 16
+        self.speed = sprite_speed
         self.direction = RIGHT
         self.bodies = []
-        self.bodyDirections = []
-        self.bodyWait = int(self.size // SpriteSpeed)
+        self.body_directions = []
+        self.body_wait = int(self.size // sprite_speed)
         self.image = pygame.Surface([self.size, self.size])
         pygame.draw.rect(self.image, (234, 0, 255), pygame.Rect(0, 0, self.size, self.size))
         self.rect = self.image.get_rect()
@@ -38,15 +38,15 @@ class SnakeHead(Sprite):
         else:
             self.rect.y += self.speed
 
-        self.bodyDirections.insert(0, self.direction)
+        self.body_directions.insert(0, self.direction)
 
-    def bodyInstructions(self):
+    def body_instructions(self):
         body: SnakeBody
         for num, body in enumerate(self.bodies):
             num += 1
-            body.move(self.bodyDirections[num * self.bodyWait - 1])
+            body.move(self.body_directions[num * self.body_wait - 1])
 
-    def appleEaten(self):
+    def apple_eaten(self):
         self.score += 1
         if len(self.bodies) == 0:
             sprite = SnakeBody(self.size, self.speed, self.rect.x, self.rect.y)
@@ -57,28 +57,28 @@ class SnakeHead(Sprite):
             sprite = SnakeBody(self.size, self.speed, body.rect.x, body.rect.y)
             self.bodies.append(sprite)
 
-    def checkDeath(self):
-        windowSize = self.windowSize
-        border = windowSize / 20
+    def check_death(self):
+        window_size = self.window_size
+        border = window_size / 20
 
-        if any([border > coord or windowSize - border - self.size < coord for coord in (self.rect.x, self.rect.y)]):
+        if any([border > coord or window_size - border - self.size < coord for coord in (self.rect.x, self.rect.y)]):
             return True
 
         if len(self.bodies) < 1:
             return False
 
-        changePos = self.size * 1 / 6
-        newSize = self.size * 2 / 3
+        change_position = self.size * 1 / 6
+        new_size = self.size * 2 / 3
 
-        newRect = pygame.Rect(self.rect.x + changePos, self.rect.y + changePos, newSize, newSize)
+        new_rect = pygame.Rect(self.rect.x + change_position, self.rect.y + change_position, new_size, new_size)
 
-        for body in [sprite for sprite in self.bodies if sprite.age > sprite.ageNeeded]:
-            if newRect.colliderect(body.rect):
+        for body in [sprite for sprite in self.bodies if sprite.age > sprite.age_needed]:
+            if new_rect.colliderect(body.rect):
                 return True
 
         return False
 
-    def appleTouch(self, apple):
+    def apple_touch(self, apple):
         if self.rect.colliderect(apple):
             return True
         for body in self.bodies:
@@ -90,21 +90,21 @@ class SnakeHead(Sprite):
 class SnakeBody(Sprite):
     first = False
 
-    def __init__(self, SpriteSize, SpriteSpeed, xCood, yCoord, *groups):
-        self.size = SpriteSize
-        self.speed = SpriteSpeed
+    def __init__(self, sprite_size, sprite_speed, xCoord, yCoord, *groups):
+        self.size = sprite_size
+        self.speed = sprite_speed
         self.age = 1
-        self.ageNeeded = int(SpriteSize // SpriteSpeed)
-        self.image = pygame.Surface([SpriteSize, SpriteSize])
-        pygame.draw.rect(self.image, (130, 0, 184), pygame.Rect(0, 0, SpriteSize, SpriteSize))
+        self.age_needed = int(sprite_size // sprite_speed)
+        self.image = pygame.Surface([sprite_size, sprite_size])
+        pygame.draw.rect(self.image, (130, 0, 184), pygame.Rect(0, 0, sprite_size, sprite_size))
         self.rect = self.image.get_rect()
-        self.rect.x = xCood
+        self.rect.x = xCoord
         self.rect.y = yCoord
 
         super().__init__(*groups)
 
     def move(self, direction):
-        if self.age + self.first > self.ageNeeded:
+        if self.age + self.first > self.age_needed:
             if direction == LEFT:
                 self.rect.x -= self.speed
             elif direction == RIGHT:
@@ -120,14 +120,14 @@ class SnakeBody(Sprite):
 class Apple(Sprite):
 
     def __init__(self, window, *groups):
-        self.windowSize = window.get_size()[0]
-        self.size = self.size = self.windowSize / 32
+        self.window_size = window.get_size()[0]
+        self.size = self.size = self.window_size / 32
         self.image = pygame.Surface([self.size, self.size])
         pygame.draw.rect(self.image, (255, 0, 0), pygame.Rect(0, 0, self.size, self.size))
         self.rect = self.image.get_rect()
         super().__init__(*groups)
-        self.randomizePos()
+        self.randomize_position()
 
-    def randomizePos(self):
-        self.rect.x = randint(self.windowSize / 20, self.windowSize * 0.95 - self.size)
-        self.rect.y = randint(self.windowSize / 20, self.windowSize * 0.95 - self.size)
+    def randomize_position(self):
+        self.rect.x = randint(self.window_size / 20, self.window_size * 0.95 - self.size)
+        self.rect.y = randint(self.window_size / 20, self.window_size * 0.95 - self.size)

@@ -13,9 +13,9 @@ pygame.init()
 
 def draw():
     window.fill((102, 237, 90))
-    wallsChunk = size / 20
+    walls_chunk = size / 20
     green = (78, 158, 71)
-    rect(window, green, pygame.Rect(wallsChunk, wallsChunk, round(size * 0.9), round(size * 0.9)))
+    rect(window, green, pygame.Rect(walls_chunk, walls_chunk, round(size * 0.9), round(size * 0.9)))
 
 
 size = 800
@@ -25,7 +25,7 @@ window = pygame.display.set_mode((size, size))
 draw()
 pygame.display.flip()
 
-SpriteList = pygame.sprite.Group()
+sprite_list = pygame.sprite.Group()
 
 clock = Clock()
 speed = 4
@@ -34,11 +34,11 @@ coord = 15 * size / 32
 head.rect.x = coord
 head.rect.y = coord
 
-SpriteList.add(head)
-SpriteList.draw(window)
+sprite_list.add(head)
+sprite_list.draw(window)
 
 started = False
-appleEaten = False
+apple_eaten = False
 alive = True
 count = 0
 apple = None
@@ -70,31 +70,31 @@ while alive:
                 head.direction = DOWN
 
             if event.key == K_g:
-                appleEaten = True
+                apple_eaten = True
 
     if started:
-        if appleEaten:
-            head.appleEaten()
-            appleEaten = False
+        if apple_eaten:
+            head.apple_eaten()
+            apple_eaten = False
         head.move()
-        head.bodyInstructions()
-        alive = not head.checkDeath()
-        if apple not in SpriteList:
+        head.body_instructions()
+        alive = not head.check_death()
+        if apple not in sprite_list:
             count += 1
             if count == 20:
                 count = 0
                 apple = Apple(window)
-                SpriteList.add(apple)
+                sprite_list.add(apple)
 
         elif head.rect.colliderect(apple):
-            SpriteList.remove(apple)
-            head.appleEaten()
+            sprite_list.remove(apple)
+            head.apple_eaten()
 
     clock.tick(60)
     draw()
-    for sprite in set(head.bodies) - set(SpriteList):
-        SpriteList.add(sprite)
-    SpriteList.draw(window)
+    for sprite in set(head.bodies) - set(sprite_list):
+        sprite_list.add(sprite)
+    sprite_list.draw(window)
     pygame.display.flip()
 
 print(f"You got a score of {head.score}")
